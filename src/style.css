@@ -1,0 +1,31 @@
+:root {
+    --ui-padding: 1rem;
+    --ui-border-radius: 1rem;
+    --ui-border-size: 2px;
+
+    --text-large: 2rem;
+    --text-medium: 1rem;
+    --text-small: 0.8rem;
+}
+
+.flexc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexs {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}

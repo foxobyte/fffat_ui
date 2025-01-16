@@ -1,0 +1,45 @@
+:root {
+    /*
+    --tertiary-color: #0000ff;
+    --quaternary-color: #00ffff;
+    --quinary-color: #ffff00;
+    */
+
+    --call-to-action-color: #ff5c00;
+    --call-to-action-color-raw: 255, 92, 0;
+
+    /* COLORS */
+    --cyan-hex: #00FFFF;
+    --cyan-rgb: 0, 255, 255;
+
+    --black-rock-hex: #130230;
+    --black-rock-rgb: 19, 2, 48;
+
+    --magenta-hex: #FF00FF;
+    --magenta-rgb: 255, 0, 255;
+
+    --blue-hex: #0000FF;
+    --blue-rgb: 0, 0, 255;
+
+    --yellow-hex: #FFFF00;
+    --yellow-rgb: 255, 255, 0;
+
+    --blaze-orange-hex: #FF5C00;
+    --blaze-orange-rgb: 255, 92, 0;
+}
+
+:root, .vapor-wave-theme {
+    --primary-color-hex: var(--cyan-hex);
+    --primary-color-rgb: var(--cyan-rgb);
+    --secondary-color-hex: var(--magenta-hex);
+    --secondary-color-rgb: var(--magenta-rgb);
+
+    --primary-background-color-hex: var(--black-rock-hex);
+    --primary-background-color-rgb: var(--black-rock-rgb);
+    --secondary-background-color-hex: var(--blue-hex);
+    --secondary-background-color-rgb: var(--blue-rgb);
+
+    --ui-border-color: var(--secondary-color-hex);
+    --ui-background-color: rgba(150,150,150,0.3);
+    --ui-text-color: white;
+}

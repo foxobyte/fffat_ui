@@ -1,0 +1,19 @@
+.container {
+    padding: var(--ui-padding);
+    width: calc(100% - (var(--ui-padding) * 2) - (var(--ui-border-size) * 2));
+    background-color: var(--ui-background-color);
+    border-radius: var(--ui-border-radius);
+    border: var(--ui-border-size) solid var(--ui-border-color);
+}
+
+.container-label {
+    
+}
+
+.container-value {
+
+}
+
+.single-value-container {
+    flex-direction: column;
+}
