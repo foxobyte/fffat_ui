@@ -16,8 +16,14 @@
 
 .flexs {
     display: flex;
-    justify-content: center;
-    align-items: start;
+    justify-content: start;
+    align-items: center;
+}
+
+.flexe {
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 
 .noselect {

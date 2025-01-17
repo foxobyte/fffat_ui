@@ -3,6 +3,7 @@ import './theme.css';
 import './style.css';
 import './App.css';
 import SingleValueContainer from './components/containers/SingleValueContainer.tsx';
+import BarChart from './components/graphs/BarChart.tsx';
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
             </nav>
             <div className="content vapor-wave-theme">
                 <SingleValueContainer label="Balance" value="$2,350" />
+                <BarChart />
             </div>
         </>
     );
