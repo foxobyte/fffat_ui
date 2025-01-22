@@ -4,6 +4,7 @@ import './style.css';
 import './App.css';
 import SingleValueContainer from './components/containers/SingleValueContainer.tsx';
 import BarChart from './components/graphs/BarChart.tsx';
+import StackedBarChart from './components/graphs/StackedBarChart.tsx';
 
 
 const App = () => {
@@ -30,19 +31,37 @@ const App = () => {
                     <SingleValueContainer label="Balance" value="$2,350" />
                 </div>
                 <BarChart 
-                    svgWidth={1920}
-                    svgHeight={1080}
+                    svgWidth={960}
+                    svgHeight={540}
+                    margin={{
+                        top: 20,
+                        bottom: 60,
+                        left: 100,
+                        right: 100
+                    }}
+                    title={"test"}
+                    data={[
+                        { name: new Date().toDateString(), value: 3000 },
+                        { name: "Thu Feb 16 2025", value: 3500 },
+                        { name: "Thu Mar 16 2025", value: 3566 },
+                        { name: "Thu Jun 16 2025", value: 5988 },
+                    ]}
+                />
+                <StackedBarChart
+                    svgWidth={960}
+                    svgHeight={540}
                     margin={{
                         top: 20,
                         bottom: 20,
                         left: 100,
                         right: 100
                     }}
+                    title={"spending"}
                     data={[
-                        { name: new Date().toDateString(), value: 3000 },
-                        { name: "Thu Feb 16 2025", value: 3500 },
-                        { name: "Thu Mar 16 2025", value: 3566 },
-                        { name: "Thu Jun 16 2025", value: 5988 },
+                        { name: "Feb, 2025", value: 3000, category: "groceries" },
+                        { name: "Feb, 2025", value: 3500, category: "rent" },
+                        { name: "Feb, 2025", value: 3566, category: "hobbies" },
+                        { name: "Feb, 2025", value: 5988, category: "extra" },
                     ]}
                 />
             </div>

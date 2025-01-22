@@ -30,8 +30,10 @@ export default function BarChart(props: BarChartProps) {
             .select(svgRef.current)
             .append('svg')
             .attr('id', title + "svg")
-            .attr('width', svgWidth)
-            .attr('height', svgHeight);
+            // .attr('width', svgWidth)
+            // .attr('height', svgHeight)
+            .attr("viewBox", [0, 0, svgWidth, svgHeight])
+            .attr("style", "max-width: 100%; height: auto;");
 
         const chart = svg
             .append('g')
