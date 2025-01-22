@@ -1,18 +1,19 @@
 .container {
-    margin-bottom: var(--ui-padding);
-    padding: var(--ui-padding);
-    width: calc(100% - (var(--ui-padding) * 2) - (var(--ui-border-size) * 2));
+    margin: var(--ui-padding);
+    /* padding: var(--ui-padding); */
+    /* width: calc(100% - (var(--ui-padding) * 2) - (var(--ui-border-size) * 2)); */
+    width: 100%;
     background-color: var(--ui-background-color);
     border-radius: var(--ui-border-radius);
     border: var(--ui-border-size) solid var(--ui-border-color);
 }
 
 .container-label {
-    
+    padding: var(--ui-padding);
 }
 
 .container-value {
-
+    padding: var(--ui-padding);
 }
 
 .single-value-container {

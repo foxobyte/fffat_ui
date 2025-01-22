@@ -24,8 +24,27 @@ const App = () => {
                 </div>
             </nav>
             <div className="content vapor-wave-theme">
-                <SingleValueContainer label="Balance" value="$2,350" />
-                <BarChart />
+                <div className="single-value-containers flexc">
+                    <SingleValueContainer label="Balance" value="$2,350" />
+                    <SingleValueContainer label="Credit" value="$2,350" />
+                    <SingleValueContainer label="Balance" value="$2,350" />
+                </div>
+                <BarChart 
+                    svgWidth={1920}
+                    svgHeight={1080}
+                    margin={{
+                        top: 20,
+                        bottom: 20,
+                        left: 100,
+                        right: 100
+                    }}
+                    data={[
+                        { name: new Date().toDateString(), value: 3000 },
+                        { name: "Thu Feb 16 2025", value: 3500 },
+                        { name: "Thu Mar 16 2025", value: 3566 },
+                        { name: "Thu Jun 16 2025", value: 5988 },
+                    ]}
+                />
             </div>
         </>
     );

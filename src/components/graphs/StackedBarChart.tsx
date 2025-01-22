@@ -14,11 +14,13 @@ interface BarChartProps {
     },
     data: {
         name: string,
-        value: number
+        value: number,
+        category: string
     }[]
 }
 
-export default function BarChart(props: BarChartProps) {
+// https://observablehq.com/@d3/stacked-bar-chart/2
+export default function StackedBarChart(props: BarChartProps) {
     const { title, data, svgWidth, svgHeight, margin } = props;
     const chartWidth = svgWidth - margin.left - margin.right;
     const chartHeight = svgHeight - margin.top - margin.bottom;
@@ -26,6 +28,11 @@ export default function BarChart(props: BarChartProps) {
 
     useEffect(() => {
         document.getElementById(title + "svg")?.remove()
+        const series = d3.stack()
+            .keys(d3.union(data.map(d => d.name)))
+            .value(([, D], key) => D.get(key).population) // get value for each series key and stack
+            (d3.index(data, d => d.state, d => d.age));
+
         const svg = d3
             .select(svgRef.current)
             .append('svg')

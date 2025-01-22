@@ -1,14 +1,9 @@
-.bar-chart-wrapper {
-    padding: var(--ui-padding);
+.bar-chart {
+    /* padding: var(--ui-padding); */
     width: calc(100% - (var(--ui-padding) * 2) - (var(--ui-border-size) * 2));
     background-color: var(--ui-background-color);
     border-radius: var(--ui-border-radius);
     border: var(--ui-border-size) solid var(--ui-border-color);
-    height: 100%;
-    /* width: 100%; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 
