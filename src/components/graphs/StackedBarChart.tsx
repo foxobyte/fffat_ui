@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
-import './barChart.css';
+import './stackedBarChart.css';
 
 interface BarChartProps {
     title: string,
@@ -40,16 +40,16 @@ export default function StackedBarChart(props: BarChartProps) {
         const svg = d3
             .select(svgRef.current)
             .append('svg')
-            .attr('id', title + "svg")
-            .attr("viewBox", [0, 0, svgWidth, svgHeight])
-            .attr('width', svgWidth)
-            .attr('height', svgHeight);
+                .attr('id', title + "svg")
+                .attr("viewBox", [0, 0, svgWidth, svgHeight])
+                .attr('width', svgWidth)
+                .attr('height', svgHeight);
 
         const chart = svg
             .append('g')
-            .attr('width', chartWidth)
-            .attr('height', chartHeight)
-            .attr('transform', `translate(${margin.left}, ${margin.top})`);
+                .attr('width', chartWidth)
+                .attr('height', chartHeight)
+                .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
         const xAxisGroup = chart.append('g').attr('transform', `translate(0, ${chartHeight})`);
         const yAxisGroup = chart.append('g');
@@ -79,10 +79,15 @@ export default function StackedBarChart(props: BarChartProps) {
             .data(D => D.map(d => (d.key = D.key, d)))
             .join("rect")
                 .attr("x", d => xScale(d.data[0]))
-                .attr("y", d => yScale(d[1]))
+                .attr("y", d => {
+                    // console.log(d, chartHeight);
+                    // return yScale(d[1]);
+                    return chartHeight;
+                })
                 .attr("height", d => {
-                    console.log();
-                    return chartHeight - (chartHeight - (yScale(d[0]) + yScale(d[1])))
+                    // console.log(d);
+                    // return yScale(d[0]) - yScale(d[1]);
+                    return 0;
                 })
                 .attr("width", xScale.bandwidth())
             .append("title")
@@ -91,6 +96,7 @@ export default function StackedBarChart(props: BarChartProps) {
         chart.selectAll('rect')
             .transition()
             .duration(1000)
+            .attr("y", d => yScale(d[1]))
             .attr("height", d => yScale(d[0]) - yScale(d[1]))
 
         xAxisGroup.call(xAxis);
@@ -109,7 +115,7 @@ export default function StackedBarChart(props: BarChartProps) {
     })
 
     return (
-        <div ref={svgRef} className="bar-chart container flexc">
+        <div ref={svgRef} className="stacked-bar-chart container flexc">
 
         </div>
     )
