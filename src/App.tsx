@@ -31,8 +31,8 @@ const App = () => {
                     <SingleValueContainer label="Balance" value="$2,350" />
                 </div>
                 <BarChart 
-                    svgWidth={960}
-                    svgHeight={540}
+                    svgWidth={480}
+                    svgHeight={270}
                     margin={{
                         top: 20,
                         bottom: 60,
@@ -48,11 +48,11 @@ const App = () => {
                     ]}
                 />
                 <StackedBarChart
-                    svgWidth={960}
-                    svgHeight={540}
+                    svgWidth={480}
+                    svgHeight={270}
                     margin={{
                         top: 20,
-                        bottom: 20,
+                        bottom: 60,
                         left: 100,
                         right: 100
                     }}
@@ -62,6 +62,14 @@ const App = () => {
                         { name: "Feb, 2025", value: 3500, category: "rent" },
                         { name: "Feb, 2025", value: 3566, category: "hobbies" },
                         { name: "Feb, 2025", value: 5988, category: "extra" },
+                        { name: "Mar, 2025", value: 2000, category: "groceries" },
+                        { name: "Mar, 2025", value: 3400, category: "rent" },
+                        { name: "Mar, 2025", value: 1566, category: "hobbies" },
+                        { name: "Mar, 2025", value: 6988, category: "extra" },
+                        { name: "Apr, 2025", value: 2000, category: "groceries" },
+                        { name: "Apr, 2025", value: 5500, category: "rent" },
+                        { name: "Apr, 2025", value: 3566, category: "hobbies" },
+                        { name: "Apr, 2025", value: 1988, category: "extra" },
                     ]}
                 />
             </div>

@@ -42,7 +42,8 @@ export default function StackedBarChart(props: BarChartProps) {
             .append('svg')
             .attr('id', title + "svg")
             .attr("viewBox", [0, 0, svgWidth, svgHeight])
-            .attr("style", "max-width: 100%; height: auto;");
+            .attr('width', svgWidth)
+            .attr('height', svgHeight);
 
         const chart = svg
             .append('g')
@@ -55,19 +56,19 @@ export default function StackedBarChart(props: BarChartProps) {
 
         const xScale = d3.scaleBand()
             .domain(d3.groupSort(data, D => -d3.sum(D, d => d.category), d => d.name))
-            .range([0, chartWidth]).paddingInner(0.1).paddingOuter(0);
+            .range([0, chartWidth])
+            .paddingInner(0.1)
+            .paddingOuter(0);
 
         const yScale = d3.scaleLinear()
             .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
-            .rangeRound([chartHeight - margin.bottom, margin.top]);
+            .rangeRound([chartHeight, margin.top]);
 
         const xAxis = d3.axisBottom(xScale);
         const yAxis = d3
             .axisLeft(yScale)
+            .ticks(5)
             .tickFormat((d) => `$${d}`);
-
-        // xScale.domain(data.map((item) => item.name));
-        // yScale.domain([0, d3.max(data, (d) => d.value)]);
 
         chart.append("g")
             .selectAll()
@@ -79,41 +80,18 @@ export default function StackedBarChart(props: BarChartProps) {
             .join("rect")
                 .attr("x", d => xScale(d.data[0]))
                 .attr("y", d => yScale(d[1]))
-                .attr("height", d => yScale(d[0]) - yScale(d[1]))
+                .attr("height", d => {
+                    console.log();
+                    return chartHeight - (chartHeight - (yScale(d[0]) + yScale(d[1])))
+                })
                 .attr("width", xScale.bandwidth())
-        // .append("title")
-        //   .text(d => `${d.data[0]} ${d.key}\n${formatValue(d.data[1].get(d.key).population)}`);
+            .append("title")
+            .text(d => `${d.data[1].get(d.key).category}\n${d.data[1].get(d.key).value}`);
 
-        // const rects = chart.selectAll('rect')
-        //     .data(D => D.map(d => (d.key = D.key, d)))    
-        //     .join("rect")
-        //     .attr("x", d => xScale(d[0]))
-        //     .attr("y", d => yScale(d.value))
-        //     .attr("height", d => {
-        //         console.log(d);
-        //         console.log(yScale(d[0]), yScale(d.value));
-        //         return yScale(d.category) - yScale(d.value);
-        //     })
-        //     .attr("width", xScale.bandwidth());
-
-        // rects
-        //     .attr('width', xScale.bandwidth)
-        //     .attr('height', (d) => chartHeight - yScale(d.value))
-        //     .attr('x', (d) => xScale(d.name))
-        //     .attr('y', (d) => yScale(d.value))
-        //     .style('fill', 'orange');
-
-        // rects
-        //     .enter()
-        //     .append('rect')
-        //     .attr('x', (d) => xScale(d.name))
-        //     .attr('y', (d) => chartHeight)
-        //     .attr('width', xScale.bandwidth)
-        //     .transition()
-        //     .duration(1000)
-        //     .attr('height', (d) => chartHeight - yScale(d.value))
-        //     .attr('transform', (d) => `translate(0, ${(yScale(d.value) - chartHeight)})`)
-        //     .style('fill', 'orange')
+        chart.selectAll('rect')
+            .transition()
+            .duration(1000)
+            .attr("height", d => yScale(d[0]) - yScale(d[1]))
 
         xAxisGroup.call(xAxis);
         yAxisGroup.call(yAxis);
