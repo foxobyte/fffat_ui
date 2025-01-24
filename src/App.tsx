@@ -5,13 +5,15 @@ import './App.css';
 import SingleValueContainer from './components/containers/SingleValueContainer.tsx';
 import BarChart from './components/graphs/BarChart.tsx';
 import StackedBarChart from './components/graphs/StackedBarChart.tsx';
-
+import * as d3 from 'd3';
 
 const App = () => {
     // console.log(navigator.userAgent)
     useEffect(() => {
         // Initialize App
     }, [])
+
+    const scheme = d3.schemeSet1;
 
     return (
         <>
@@ -31,6 +33,10 @@ const App = () => {
                     <SingleValueContainer label="Balance" value="$2,350" />
                 </div>
                 <BarChart 
+                    label={"test"}
+                    xLabel={"x axis"}
+                    yLabel={"y axis"}
+                    scheme={scheme}
                     svgWidth={480}
                     svgHeight={270}
                     margin={{
@@ -39,15 +45,23 @@ const App = () => {
                         left: 100,
                         right: 100
                     }}
-                    title={"test"}
+                    padding={{
+                        top: 10,
+                        bottom: 10,
+                        left: 10,
+                        right: 10
+                    }}
                     data={[
-                        { name: new Date().toDateString(), value: 3000 },
-                        { name: "Thu Feb 16 2025", value: 3500 },
-                        { name: "Thu Mar 16 2025", value: 3566 },
-                        { name: "Thu Jun 16 2025", value: 5988 },
+                        { key: "Thu Jan 16 2025", value: 3000, color: "orange" },
+                        { key: "Thu Feb 16 2025", value: 3500, color: "orange" },
+                        { key: "Thu Jun 16 2025", value: 5988, color: "orange" },
+                        { key: "Thu Mar 16 2025", value: 3566, color: "orange" },
+                        { key: "Thu Apr 16 2025", value: 5988, color: "orange" },
                     ]}
                 />
                 <StackedBarChart
+                    title={"spending"}
+                    scheme={scheme}
                     svgWidth={480}
                     svgHeight={270}
                     margin={{
@@ -56,20 +70,19 @@ const App = () => {
                         left: 100,
                         right: 100
                     }}
-                    title={"spending"}
                     data={[
-                        { name: "Feb, 2025", value: 3000, category: "groceries" },
-                        { name: "Feb, 2025", value: 3500, category: "rent" },
-                        { name: "Feb, 2025", value: 3566, category: "hobbies" },
-                        { name: "Feb, 2025", value: 5988, category: "extra" },
-                        { name: "Mar, 2025", value: 2000, category: "groceries" },
-                        { name: "Mar, 2025", value: 3400, category: "rent" },
-                        { name: "Mar, 2025", value: 1566, category: "hobbies" },
-                        { name: "Mar, 2025", value: 6988, category: "extra" },
-                        { name: "Apr, 2025", value: 2000, category: "groceries" },
-                        { name: "Apr, 2025", value: 5500, category: "rent" },
-                        { name: "Apr, 2025", value: 3566, category: "hobbies" },
-                        { name: "Apr, 2025", value: 1988, category: "extra" },
+                        { name: "Feb, 2025", value: 3000, color: "red", category: "groceries" },
+                        { name: "Feb, 2025", value: 3500, color: "orange", category: "rent" },
+                        { name: "Feb, 2025", value: 3566, color: "yellow", category: "hobbies" },
+                        { name: "Feb, 2025", value: 5988, color: "green", category: "extra" },
+                        { name: "Mar, 2025", value: 2000, color: "red", category: "groceries" },
+                        { name: "Mar, 2025", value: 3400, color: "orange", category: "rent" },
+                        { name: "Mar, 2025", value: 1566, color: "yellow", category: "hobbies" },
+                        { name: "Mar, 2025", value: 6988, color: "green", category: "extra" },
+                        { name: "Apr, 2025", value: 2000, color: "red", category: "groceries" },
+                        { name: "Apr, 2025", value: 5500, color: "orange", category: "rent" },
+                        { name: "Apr, 2025", value: 3566, color: "yellow", category: "hobbies" },
+                        { name: "Apr, 2025", value: 1988, color: "green", category: "extra" },
                     ]}
                 />
             </div>

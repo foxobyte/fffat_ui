@@ -4,6 +4,7 @@ import './stackedBarChart.css';
 
 interface BarChartProps {
     title: string,
+    scheme: string[],
     svgWidth: number,
     svgHeight: number,
     margin: {
@@ -15,12 +16,13 @@ interface BarChartProps {
     data: {
         name: string,
         value: number,
+        color: string,
         category: string
     }[]
 }
 
 export default function StackedBarChart(props: BarChartProps) {
-    const { title, data, svgWidth, svgHeight, margin } = props;
+    const { title, scheme, svgWidth, svgHeight, margin, data } = props;
     const chartWidth = svgWidth - margin.left - margin.right;
     const chartHeight = svgHeight - margin.top - margin.bottom;
     const svgRef = useRef();
@@ -29,12 +31,12 @@ export default function StackedBarChart(props: BarChartProps) {
         document.getElementById(title + "svg")?.remove()
         const series = d3.stack()
             .keys(d3.union(data.map(d => d.category)))
-            .value(([, D], key) => D.get(key).value) // get value for each series key and stack
+            .value(([, D], key) => D.get(key).value) 
             (d3.index(data, d => d.name, d => d.category));
 
         const color = d3.scaleOrdinal()
             .domain(series.map(d => d.key))
-            .range(d3.schemeSpectral[series.length])
+            .range(data.map(d => d.color))
             .unknown("#ccc");
 
         const svg = d3
@@ -70,6 +72,9 @@ export default function StackedBarChart(props: BarChartProps) {
             .ticks(5)
             .tickFormat((d) => `$${d}`);
 
+        const rects = chart.selectAll('rect').data(data);
+        rects.exit().remove();
+
         chart.append("g")
             .selectAll()
             .data(series)
@@ -79,16 +84,8 @@ export default function StackedBarChart(props: BarChartProps) {
             .data(D => D.map(d => (d.key = D.key, d)))
             .join("rect")
                 .attr("x", d => xScale(d.data[0]))
-                .attr("y", d => {
-                    // console.log(d, chartHeight);
-                    // return yScale(d[1]);
-                    return chartHeight;
-                })
-                .attr("height", d => {
-                    // console.log(d);
-                    // return yScale(d[0]) - yScale(d[1]);
-                    return 0;
-                })
+                .attr("y", d => chartHeight)
+                .attr("height", d => 0)
                 .attr("width", xScale.bandwidth())
             .append("title")
             .text(d => `${d.data[1].get(d.key).category}\n${d.data[1].get(d.key).value}`);
