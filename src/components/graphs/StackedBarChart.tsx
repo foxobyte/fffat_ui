@@ -4,7 +4,6 @@ import './stackedBarChart.css';
 
 interface BarChartProps {
     title: string,
-    scheme: string[],
     svgWidth: number,
     svgHeight: number,
     margin: {
@@ -22,7 +21,7 @@ interface BarChartProps {
 }
 
 export default function StackedBarChart(props: BarChartProps) {
-    const { title, scheme, svgWidth, svgHeight, margin, data } = props;
+    const { title, svgWidth, svgHeight, margin, data } = props;
     const chartWidth = svgWidth - margin.left - margin.right;
     const chartHeight = svgHeight - margin.top - margin.bottom;
     const svgRef = useRef();
@@ -84,8 +83,8 @@ export default function StackedBarChart(props: BarChartProps) {
             .data(D => D.map(d => (d.key = D.key, d)))
             .join("rect")
                 .attr("x", d => xScale(d.data[0]))
-                .attr("y", d => chartHeight)
-                .attr("height", d => 0)
+                .attr("y", chartHeight)
+                .attr("height", 0)
                 .attr("width", xScale.bandwidth())
             .append("title")
             .text(d => `${d.data[1].get(d.key).category}\n${d.data[1].get(d.key).value}`);

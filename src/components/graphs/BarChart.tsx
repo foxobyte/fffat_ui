@@ -6,7 +6,6 @@ interface BarChartProps {
     label: string,
     xLabel: string,
     yLabel: string,
-    scheme: string[],
     svgWidth: number,
     svgHeight: number,
     margin: {
@@ -29,7 +28,7 @@ interface BarChartProps {
 }
 
 export default function BarChart(props: BarChartProps) {
-    const { label, xLabel, yLabel, scheme, svgWidth, svgHeight, margin, padding, data } = props;
+    const { label, xLabel, yLabel, svgWidth, svgHeight, margin, padding, data } = props;
     const chartWidth = svgWidth - margin.left - margin.right - padding.left;
     const chartHeight = svgHeight - margin.top - margin.bottom - padding.top - padding.bottom;
     const titleSize = 20;
@@ -46,16 +45,17 @@ export default function BarChart(props: BarChartProps) {
             .attr('height', svgHeight)
             .attr("viewBox", [0, 0, svgWidth, svgHeight]);
 
-        const title = svg
+        svg
             .append('text')
             .attr('x', svgWidth / 2)
             .attr('y', (padding.top / 2) + (titleSize / 2))
             .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
             .attr('font-size', titleSize)
             .attr('fill', 'currentColor')
             .text(label)
 
-        const xTitle = svg
+        svg
             .append('text')
             .attr('x', svgWidth / 2)
             .attr('y', svgHeight - (padding.bottom / 2))
@@ -63,7 +63,7 @@ export default function BarChart(props: BarChartProps) {
             .attr('fill', 'currentColor')
             .text(xLabel)
 
-        const yTitle = svg
+        svg
             .append('text')
             .attr('x', padding.left + (fontSize / 2))
             .attr('y', svgHeight / 2)
@@ -73,15 +73,15 @@ export default function BarChart(props: BarChartProps) {
             .attr('writing-mode', 'tb-rl')
             .text(yLabel)
 
-        const legend = svg
-            .selectAll('dots')
-            .data(data)
-            .enter()
-            .append('circle')
-                .attr('cx', '25')
-                .attr('cy', '25')
-                .attr('r', '7')
-                .attr('fill', d => console.log(d))
+        // svg
+        //     .selectAll('dots')
+        //     .data(data)
+        //     .enter()
+        //     .append('circle')
+        //         .attr('cx', '25')
+        //         .attr('cy', '25')
+        //         .attr('r', '7')
+        //         .attr('fill', d => console.log(d))
 
         const chart = svg
             .append('g')

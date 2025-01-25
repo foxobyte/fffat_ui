@@ -6,6 +6,7 @@ import SingleValueContainer from './components/containers/SingleValueContainer.t
 import BarChart from './components/graphs/BarChart.tsx';
 import StackedBarChart from './components/graphs/StackedBarChart.tsx';
 import * as d3 from 'd3';
+import getDeviceType from './util/getDeviceType.ts';
 
 const App = () => {
     // console.log(navigator.userAgent)
@@ -14,19 +15,24 @@ const App = () => {
     }, [])
 
     const scheme = d3.schemeSet1;
+    const device = getDeviceType();
+
+    useEffect(() => {
+        if (device === "Mobile") {
+            const content = document.getElementById('content');
+            content!.style.height = "calc(100% - (var(--nav-height) * 2))";
+        }
+    }) 
 
     return (
         <>
-            <nav className="flexs">
-                FFFAT
-                <div className="nav-user flexc">
-                    <svg className="nav-user-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                        {/* <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--> */}
-                        <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z" />
-                    </svg>
-                </div>
+            <nav className="nav-top flexc">
+                <svg className="nav-user-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    {/* <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--> */}
+                    <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z" />
+                </svg>
             </nav>
-            <div className="content vapor-wave-theme">
+            <div id="content" className="content vapor-wave-theme">
                 <div className="single-value-containers flexc">
                     <SingleValueContainer label="Balance" value="$2,350" />
                     <SingleValueContainer label="Credit" value="$2,350" />
@@ -36,7 +42,6 @@ const App = () => {
                     label={"test"}
                     xLabel={"x axis"}
                     yLabel={"y axis"}
-                    scheme={scheme}
                     svgWidth={480}
                     svgHeight={270}
                     margin={{
@@ -61,7 +66,6 @@ const App = () => {
                 />
                 <StackedBarChart
                     title={"spending"}
-                    scheme={scheme}
                     svgWidth={480}
                     svgHeight={270}
                     margin={{
@@ -86,6 +90,8 @@ const App = () => {
                     ]}
                 />
             </div>
+            {device === 'Mobile' ? 
+                <nav className="nav-bottom"></nav> : ""}
         </>
     );
 }

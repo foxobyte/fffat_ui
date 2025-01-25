@@ -9,17 +9,21 @@ html {
     color: var(--ui-text-color);
 }
 
-nav {
+.nav-top {
+    /* position: absolute; */
     height: var(--nav-height);
     width: 100%;
     background-color: var(--ui-background-color);
     border-bottom: 2px solid var(--primary-color-hex);
-    /* background-color: var(--secondary-background-color-hex); */
 }
 
-.nav-user {
+.nav-bottom {
+    position: fixed;
+    bottom: 0;
     height: var(--nav-height);
-    width: var(--nav-height);
+    width: 100%;
+    background-color: var(--ui-background-color);
+    border-top: 2px solid var(--primary-color-hex);
 }
 
 .nav-user-icon {
