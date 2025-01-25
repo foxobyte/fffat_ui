@@ -38,23 +38,6 @@ svg {
     width: 100%;
 }
 
-.nav-icon-link {
-    height: var(--icon-wrapper-size);
-    width: var(--icon-wrapper-size);
-    flex-direction: column;
-    margin: 4px;
-}
-
-.nav-icon {
-    height: var(--icon-size);
-    width: var(--icon-size);
-    fill: white;
-}
-
-.nav-icon-text {
-    font-size: var(--text-small);
-}
-
 .content {
     height: 100%;
     width: calc(100% - 32px);

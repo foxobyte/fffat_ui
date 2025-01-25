@@ -95,9 +95,9 @@ const App = () => {
             </div>
             {device === 'Mobile' ?
                 <nav className="nav-bottom flexc">
-                    <NavIcon icon="credit-card" text="credit" />
+                    <NavIcon icon="money-bill-trend-up" text="assets" />
                     <div className="nav-icon-break"></div>
-                    <NavIcon icon="money-bill" text="text" />
+                    <NavIcon icon="credit-card" text="credit" />
                 </nav> : ""
             }
         </>

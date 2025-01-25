@@ -1,0 +1,16 @@
+.nav-icon-link {
+    height: var(--icon-wrapper-size);
+    width: 100%;
+    flex-direction: column;
+    margin: 4px;
+}
+
+.nav-icon {
+    max-height: var(--icon-size);
+    max-width: var(--icon-size);
+    fill: white;
+}
+
+.nav-icon-text {
+    font-size: var(--text-small);
+}

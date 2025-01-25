@@ -18,6 +18,9 @@
     --dark-slate-blue-hex: #483D8B;
     --dark-slate-blue-rgb: 72, 61, 139;
 
+    --indigo-hex: #4B0082;
+    --indigo-rgb: 75, 0, 130;
+
     --magenta-hex: #FF00FF;
     --magenta-rgb: 255, 0, 255;
 
@@ -43,6 +46,6 @@
     --secondary-background-color-rgb: var(--blue-rgb);
 
     --ui-border-color: var(--secondary-color-hex);
-    --ui-background-color: var(--dark-slate-blue-hex);
+    --ui-background-color: 	var(--indigo-hex);
     --ui-text-color: white;
 }

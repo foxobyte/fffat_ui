@@ -1,8 +1,11 @@
-import React, { ReactSVG } from 'react';
+import React from 'react';
 import creditCard from '../../icons/CreditCard.tsx';
 import buildingColumns from '../../icons/BuildingColumns.tsx';
 import moneyBill from '../../icons/MoneyBill.tsx';
-import Wallet from '../../icons/Wallet.tsx';
+import wallet from '../../icons/Wallet.tsx';
+import moneyBillTrendUp from '../../icons/MoneyBillTrendUp.tsx';
+import user from '../../icons/User.tsx';
+import './navIcon.css';
 
 interface NavIconProps {
     icon: string,
@@ -13,7 +16,9 @@ const iconMap = {
     "credit-card": creditCard(),
     "building-columns": buildingColumns(),
     "money-bill": moneyBill(),
-    "wallet": Wallet()
+    "money-bill-trend-up": moneyBillTrendUp(),
+    "wallet": wallet(),
+    "user": user()
 }
 
 export default function NavIcon(props: NavIconProps) {
