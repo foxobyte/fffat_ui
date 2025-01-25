@@ -30,8 +30,10 @@ interface BarChartProps {
 
 export default function BarChart(props: BarChartProps) {
     const { label, xLabel, yLabel, scheme, svgWidth, svgHeight, margin, padding, data } = props;
-    const chartWidth = svgWidth - margin.left - margin.right - padding.left - padding.right;
+    const chartWidth = svgWidth - margin.left - margin.right - padding.left;
     const chartHeight = svgHeight - margin.top - margin.bottom - padding.top - padding.bottom;
+    const titleSize = 20;
+    const fontSize = 16;
     const svgRef = useRef();
 
     useEffect(() => {
@@ -47,10 +49,39 @@ export default function BarChart(props: BarChartProps) {
         const title = svg
             .append('text')
             .attr('x', svgWidth / 2)
-            .attr('y', margin.top)
+            .attr('y', (padding.top / 2) + (titleSize / 2))
             .attr('text-anchor', 'middle')
+            .attr('font-size', titleSize)
             .attr('fill', 'currentColor')
             .text(label)
+
+        const xTitle = svg
+            .append('text')
+            .attr('x', svgWidth / 2)
+            .attr('y', svgHeight - (padding.bottom / 2))
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'currentColor')
+            .text(xLabel)
+
+        const yTitle = svg
+            .append('text')
+            .attr('x', padding.left + (fontSize / 2))
+            .attr('y', svgHeight / 2)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', fontSize)
+            .attr('fill', 'currentColor')
+            .attr('writing-mode', 'tb-rl')
+            .text(yLabel)
+
+        const legend = svg
+            .selectAll('dots')
+            .data(data)
+            .enter()
+            .append('circle')
+                .attr('cx', '25')
+                .attr('cy', '25')
+                .attr('r', '7')
+                .attr('fill', d => console.log(d))
 
         const chart = svg
             .append('g')
