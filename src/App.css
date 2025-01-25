@@ -2,9 +2,11 @@ html {
     height: 100vh;
     width: 100%;
     background-color: var(--primary-background-color-hex);
+    font-size: 1em;
 
     --nav-height: 3em;
-    --user-icon-size: 2em;
+    --icon-wrapper-size: calc(2.8em - 2px);
+    --icon-size: 1.8em;
     --nav-border-color: var(--primary-color-hex);
     color: var(--ui-text-color);
 }
@@ -26,12 +28,31 @@ html {
     border-top: 2px solid var(--primary-color-hex);
 }
 
-.nav-user-icon {
-    height: var(--user-icon-size);
-    width: var(--user-icon-size);
+.nav-icon-break {
+    height: calc(100% - 12px);
+    border: 1px solid black;
+}
+
+svg {
+    height: 100%;
+    width: 100%;
+}
+
+.nav-icon-link {
+    height: var(--icon-wrapper-size);
+    width: var(--icon-wrapper-size);
+    flex-direction: column;
+    margin: 4px;
+}
+
+.nav-icon {
+    height: var(--icon-size);
+    width: var(--icon-size);
     fill: white;
-    border-radius: 50%;
-    border: 2px solid var(--nav-border-color);
+}
+
+.nav-icon-text {
+    font-size: var(--text-small);
 }
 
 .content {

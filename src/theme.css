@@ -15,6 +15,9 @@
     --black-rock-hex: #130230;
     --black-rock-rgb: 19, 2, 48;
 
+    --dark-slate-blue-hex: #483D8B;
+    --dark-slate-blue-rgb: 72, 61, 139;
+
     --magenta-hex: #FF00FF;
     --magenta-rgb: 255, 0, 255;
 
@@ -40,6 +43,6 @@
     --secondary-background-color-rgb: var(--blue-rgb);
 
     --ui-border-color: var(--secondary-color-hex);
-    --ui-background-color: rgba(150,150,150,0.3);
+    --ui-background-color: var(--dark-slate-blue-hex);
     --ui-text-color: white;
 }
