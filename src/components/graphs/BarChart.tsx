@@ -23,16 +23,20 @@ interface BarChartProps {
     data: {
         key: string,
         value: number,
+        category: string,
         color: string
     }[]
 }
 
 export default function BarChart(props: BarChartProps) {
     const { label, xLabel, yLabel, svgWidth, svgHeight, margin, padding, data } = props;
-    const chartWidth = svgWidth - margin.left - margin.right - padding.left;
-    const chartHeight = svgHeight - margin.top - margin.bottom - padding.top - padding.bottom;
     const titleSize = 20;
     const fontSize = 16;
+    const legendHeight = 100;
+    const legendIconSize = 7;
+    const chartWidth = svgWidth - margin.left - margin.right - padding.left;
+    const chartHeight = svgHeight - margin.top - margin.bottom - padding.top - padding.bottom - legendHeight;
+    const uniqueCategories = data.filter((value, index, array) => array.findIndex(v => v.category === value.category) === index)
     const svgRef = useRef();
 
     useEffect(() => {
@@ -58,7 +62,7 @@ export default function BarChart(props: BarChartProps) {
         svg
             .append('text')
             .attr('x', svgWidth / 2)
-            .attr('y', svgHeight - (padding.bottom / 2))
+            .attr('y', chartHeight + padding.bottom + padding.top + margin.top + margin.bottom)
             .attr('text-anchor', 'middle')
             .attr('fill', 'currentColor')
             .text(xLabel)
@@ -66,22 +70,40 @@ export default function BarChart(props: BarChartProps) {
         svg
             .append('text')
             .attr('x', padding.left + (fontSize / 2))
-            .attr('y', svgHeight / 2)
+            .attr('y', (chartHeight / 2) + padding.top + margin.top)
             .attr('text-anchor', 'middle')
             .attr('font-size', fontSize)
             .attr('fill', 'currentColor')
             .attr('writing-mode', 'tb-rl')
             .text(yLabel)
 
-        // svg
-        //     .selectAll('dots')
-        //     .data(data)
-        //     .enter()
-        //     .append('circle')
-        //         .attr('cx', '25')
-        //         .attr('cy', '25')
-        //         .attr('r', '7')
-        //         .attr('fill', d => console.log(d))
+        const legend = svg
+            .append('g')
+            .attr('width', svgWidth)
+            .attr('height', legendHeight)
+            .attr('transform', `translate(${svgWidth / 2}, ${chartHeight + padding.bottom + padding.top + margin.top + margin.bottom + fontSize})`)
+            
+        legend
+            .selectAll('dots')
+            .data(uniqueCategories)
+            .enter()
+            .append('circle')
+                .attr('cx', 0)
+                .attr('cy', (d, i) => 10 + i*fontSize)
+                .attr('r', legendIconSize)
+                .attr('fill', d => d.color)
+
+        legend
+            .selectAll('labels')
+            .data(uniqueCategories)
+            .enter()
+            .append('text')
+                .attr('x', legendIconSize)
+                .attr('y', (d, i) => 10 + i * fontSize + 2)
+                .style('fill', 'currentColor')
+                .text(d => d.category)
+                .attr('text-anchor', 'start')
+                .style('alignment-baseline', 'middle')
 
         const chart = svg
             .append('g')

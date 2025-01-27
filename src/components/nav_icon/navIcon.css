@@ -3,6 +3,7 @@
     width: 100%;
     flex-direction: column;
     margin: 4px;
+    cursor: pointer;
 }
 
 .nav-icon {

@@ -5,9 +5,14 @@ import './App.css';
 import SingleValueContainer from './components/containers/SingleValueContainer.tsx';
 import BarChart from './components/graphs/BarChart.tsx';
 import StackedBarChart from './components/graphs/StackedBarChart.tsx';
-import * as d3 from 'd3';
 import getDeviceType from './util/getDeviceType.ts';
 import NavIcon from './components/nav_icon/NavIcon.tsx';
+import { 
+    faCreditCard, 
+    faMoneyBillTrendUp,
+    faUser,
+    faWallet
+} from '@fortawesome/free-solid-svg-icons';
 
 const App = () => {
     // console.log(navigator.userAgent)
@@ -15,8 +20,10 @@ const App = () => {
         // Initialize App
     }, [])
 
-    const scheme = d3.schemeSet1;
     const device = getDeviceType();
+    function handleClick(event) {
+        console.log(event);
+    }
 
     // useEffect(() => {
     //     if (device === "Mobile") {
@@ -46,7 +53,7 @@ const App = () => {
                     xLabel={"x axis"}
                     yLabel={"y axis"}
                     svgWidth={480}
-                    svgHeight={270}
+                    svgHeight={360}
                     margin={{
                         top: 20,
                         bottom: 60,
@@ -60,11 +67,11 @@ const App = () => {
                         right: 10
                     }}
                     data={[
-                        { key: "Thu Jan 16 2025", value: 3000, color: "orange" },
-                        { key: "Thu Feb 16 2025", value: 3500, color: "orange" },
-                        { key: "Thu Jun 16 2025", value: 5988, color: "orange" },
-                        { key: "Thu Mar 16 2025", value: 3566, color: "orange" },
-                        { key: "Thu Apr 16 2025", value: 5988, color: "orange" },
+                        { key: "Thu Jan 16 2025", value: 3000, category: "balance", color: "orange" },
+                        { key: "Thu Feb 16 2025", value: 3500, category: "balance", color: "orange" },
+                        { key: "Thu Jun 16 2025", value: 5988, category: "balance", color: "orange" },
+                        { key: "Thu Mar 16 2025", value: 3566, category: "balance", color: "orange" },
+                        { key: "Thu Apr 16 2025", value: 5988, category: "balance", color: "orange" },
                     ]}
                 />
                 <StackedBarChart
@@ -93,11 +100,14 @@ const App = () => {
                     ]}
                 />
             </div>
+            {
+
+            }
             {device === 'Mobile' ?
                 <nav className="nav-bottom flexc">
-                    <NavIcon icon="money-bill-trend-up" text="assets" />
+                    <NavIcon target="" handleClick={handleClick.bind(this)} icon={faMoneyBillTrendUp} text="assets" />
                     <div className="nav-icon-break"></div>
-                    <NavIcon icon="credit-card" text="credit" />
+                    <NavIcon target="" handleClick={handleClick.bind(this)} icon={faCreditCard} text="credit" />
                 </nav> : ""
             }
         </>
